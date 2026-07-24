@@ -1,11 +1,11 @@
-package mindev188.board.article;
+package mindev188.board.view;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ArticleApplication {
+public class ViewApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ArticleApplication.class, args);
+        SpringApplication.run(ViewApplication.class, args);
     }
 }
