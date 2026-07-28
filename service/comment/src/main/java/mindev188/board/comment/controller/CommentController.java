@@ -8,7 +8,7 @@ import mindev188.board.comment.service.response.CommentResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class CommentController {
     private final CommentService commentService;
