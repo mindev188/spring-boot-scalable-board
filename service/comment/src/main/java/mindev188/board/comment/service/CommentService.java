@@ -6,8 +6,11 @@ import lombok.RequiredArgsConstructor;
 import mindev188.board.comment.entity.Comment;
 import mindev188.board.comment.repository.CommentRepository;
 import mindev188.board.comment.service.request.CommentCreateRequest;
+import mindev188.board.comment.service.response.CommentPageResponse;
 import mindev188.board.comment.service.response.CommentResponse;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static java.util.function.Predicate.not;
 
@@ -74,5 +77,23 @@ public class CommentService {
 
     private boolean hasChildren(Comment comment) {
         return commentRepository.countBy(comment.getArticleId(), comment.getCommentId(), 2L) == 2;
+    }
+
+    public CommentPageResponse readAll(Long articleId, Long page, Long pageSize) {
+        return CommentPageResponse.of(
+                commentRepository.findAll(articleId, (page - 1) * pageSize, pageSize).stream()
+                        .map(CommentResponse::from)
+                        .toList(),
+                commentRepository.count(articleId, PageLimitCalculator.calculatePageLimit(page, pageSize, 10L))
+        );
+    };
+
+    public List<CommentResponse> readAll(Long articleId, Long lastParentCommentId, Long lastCommentId, Long limit) {
+        List<Comment> comment = lastParentCommentId == null || lastCommentId == null ?
+                commentRepository.findAllInfiniteScroll(articleId, limit) :
+                commentRepository.findAllInfiniteScroll(articleId, lastParentCommentId, lastCommentId, limit);
+        return comment.stream()
+                .map(CommentResponse::from)
+                .toList();
     }
 }
