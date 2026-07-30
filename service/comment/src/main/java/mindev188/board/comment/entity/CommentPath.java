@@ -25,7 +25,7 @@ public class CommentPath {
 
     public static CommentPath create(String path) {
         if (isDepthOverflowed(path)) {
-            throw new IllegalArgumentException("depth overflowed");
+            throw new IllegalStateException("depth overflowed");
         }
         CommentPath commentPath = new CommentPath();
         commentPath.path = path;
@@ -68,7 +68,7 @@ public class CommentPath {
     private String increase(String path) {
         String lastChunk = path.substring(path.length() - DEPTH_CHUNK_SIZE);
         if (isChunkOverflow(lastChunk)) {
-            throw new IllegalArgumentException("chunk overflowed");
+            throw new IllegalStateException("chunk overflowed");
         }
 
         int charsetLength = CHARSET.length();

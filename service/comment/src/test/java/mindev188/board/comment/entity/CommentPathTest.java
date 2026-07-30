@@ -3,6 +3,7 @@ package mindev188.board.comment.entity;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CommentPathTest {
@@ -30,5 +31,22 @@ class CommentPathTest {
     void createChildCommentTest(CommentPath commentPath, String descendantsTopPath, String expectedChildPath) {
         CommentPath childCommentPath = commentPath.createChildCommentPath(descendantsTopPath);
         assertThat(childCommentPath.getPath()).isEqualTo(expectedChildPath);
+    }
+
+    @Test
+    void createChildCommentPathIfMaxDepthTest() {
+        assertThatThrownBy(() ->
+                    CommentPath.create("zzzzz".repeat(5)).createChildCommentPath(null)
+                ).isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    void createChildCommentPathIfChunkOverflowTest() {
+        // given
+        CommentPath commentPath = CommentPath.create("");
+
+        // when, then
+        assertThatThrownBy(() -> commentPath.createChildCommentPath("zzzzz"))
+                .isInstanceOf(IllegalStateException.class);
     }
 }
