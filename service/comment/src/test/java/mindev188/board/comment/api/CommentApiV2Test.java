@@ -57,7 +57,8 @@ public class CommentApiV2Test {
     void delete() {
         restClient.delete()
                 .uri("/v2/comments/{commentId}", 341036471232507904L)
-                .retrieve();
+                .retrieve()
+                .toBodilessEntity();
     }
 
     @Test
@@ -108,6 +109,28 @@ public class CommentApiV2Test {
         for (CommentResponse commentResponse : response1) {
             System.out.println("comment.getCommentId() = " + commentResponse.getCommentId());
         }
+    }
+
+    @Test
+    void countTest() {
+        CommentResponse response = create(new CommentCreateRequestV2(2L, "my comment1", null, 1L));
+
+        Long count1 = restClient.get()
+                .uri("/v2/comments/articles/{articleId}/count", 2L)
+                .retrieve()
+                .body(Long.class);
+        System.out.println("count = " + count1);
+
+        restClient.delete()
+                .uri("/v2/comments/{commentId}", response.getCommentId())
+                .retrieve()
+                .toBodilessEntity();
+
+        Long count2 = restClient.get()
+                .uri("/v2/comments/articles/{articleId}/count", 2L)
+                .retrieve()
+                .body(Long.class);
+        System.out.println("count = " + count2);
     }
 
     @Getter
