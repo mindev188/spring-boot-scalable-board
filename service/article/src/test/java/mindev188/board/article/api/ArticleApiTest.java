@@ -67,22 +67,6 @@ public class ArticleApiTest {
                 .toBodilessEntity();
     }
 
-    @Getter
-    @AllArgsConstructor
-    static class ArticleCreateRequest {
-        private String title;
-        private String content;
-        private Long writerId;
-        private Long boardId;
-    }
-
-    @Getter
-    @AllArgsConstructor
-    static class ArticleUpdateRequest {
-        private String title;
-        private String content;
-    }
-
     @Test
     void readAllTest() {
         ArticlePageResponse response = restClient.get()
@@ -120,5 +104,43 @@ public class ArticleApiTest {
         for (ArticleResponse articleResponse : articles2) {
             System.out.println("articleResponse.getArticleId = " + articleResponse.getArticleId());
         }
+    }
+
+    @Test
+    void countTest() {
+        ArticleResponse response = create(new ArticleCreateRequest("hi", "content", 1L, 2L));
+
+        Long count1 = restClient.get()
+                .uri("/v1/articles/boards/{boardId}/count", 2L)
+                .retrieve()
+                .body(Long.class);
+        System.out.println("count = " + count1);
+
+        restClient.delete()
+                .uri("/v1/articles/{articleId}", response.getArticleId())
+                .retrieve()
+                .toBodilessEntity();
+
+        Long count2 = restClient.get()
+                .uri("/v1/articles/boards/{boardId}/count", 2L)
+                .retrieve()
+                .body(Long.class);
+        System.out.println("count = " + count2);
+    }
+
+    @Getter
+    @AllArgsConstructor
+    static class ArticleCreateRequest {
+        private String title;
+        private String content;
+        private Long writerId;
+        private Long boardId;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    static class ArticleUpdateRequest {
+        private String title;
+        private String content;
     }
 }
