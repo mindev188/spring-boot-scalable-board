@@ -7,10 +7,16 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class ArticleViewService {
+    private final ArticleViewCountBackupProcessor articleViewCountBackupProcessor;
     private final ArticleViewCountRepository articleViewCountRepository;
+    private static final int BACK_UP_BACH_SIZE = 100;
 
     public Long increase(Long articleId, Long userId) {
-        return articleViewCountRepository.increase(articleId);
+        Long count = articleViewCountRepository.increase(articleId);
+        if (count % BACK_UP_BACH_SIZE == 0) {
+            articleViewCountBackupProcessor.backUp(articleId, count);
+        }
+        return count;
     }
 
     public Long count(Long articleId) {
