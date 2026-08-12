@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Slf4j
 @Component
@@ -40,6 +40,6 @@ public class ArticleClient {
     public static class ArticleResponse {
         private Long articleId;
         private String title;
-        private LocalDate createdAt;
+        private LocalDateTime createdAt;
     }
 }

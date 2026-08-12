@@ -30,7 +30,7 @@ public class ArticleCreatedTimeRepository {
         redisTemplate.delete(generateKey(articleId));
     }
 
-    private LocalDateTime read(Long articleId) {
+    public LocalDateTime read(Long articleId) {
         String result = redisTemplate.opsForValue().get(generateKey(articleId));
         if (result == null) {
             return null;
