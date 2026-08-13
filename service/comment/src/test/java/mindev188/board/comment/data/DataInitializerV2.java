@@ -2,8 +2,7 @@ package mindev188.board.comment.data;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import kuke.board.common.snowflake.Snowflake;
-import mindev188.board.comment.entity.Comment;
+import mindev188.board.common.snowflake.Snowflake;
 import mindev188.board.comment.entity.CommentPath;
 import mindev188.board.comment.entity.CommentV2;
 import org.junit.jupiter.api.Test;

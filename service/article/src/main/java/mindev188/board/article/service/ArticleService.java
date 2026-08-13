@@ -1,7 +1,7 @@
 package mindev188.board.article.service;
 
 import jakarta.transaction.Transactional;
-import kuke.board.common.snowflake.Snowflake;
+import mindev188.board.common.snowflake.Snowflake;
 import lombok.RequiredArgsConstructor;
 import mindev188.board.article.entity.Article;
 import mindev188.board.article.entity.BoardArticleCount;

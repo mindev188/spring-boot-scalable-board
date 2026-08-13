@@ -1,8 +1,8 @@
 package mindev188.board.hotarticle.service.eventhandler;
 
-import kuke.board.common.event.Event;
-import kuke.board.common.event.EventType;
-import kuke.board.common.event.payload.CommentCreatedEventPayload;
+import mindev188.board.common.event.Event;
+import mindev188.board.common.event.EventType;
+import mindev188.board.common.event.payload.CommentCreatedEventPayload;
 import lombok.RequiredArgsConstructor;
 import mindev188.board.hotarticle.repository.ArticleCommentCountRepository;
 import mindev188.board.hotarticle.utils.TimeCalculatorUtils;

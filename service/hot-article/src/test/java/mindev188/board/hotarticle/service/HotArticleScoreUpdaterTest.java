@@ -1,6 +1,6 @@
 package mindev188.board.hotarticle.service;
 
-import kuke.board.common.event.Event;
+import mindev188.board.common.event.Event;
 import mindev188.board.hotarticle.repository.ArticleCreatedTimeRepository;
 import mindev188.board.hotarticle.repository.HotArticleListRepository;
 import mindev188.board.hotarticle.service.eventhandler.EventHandler;
@@ -13,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 

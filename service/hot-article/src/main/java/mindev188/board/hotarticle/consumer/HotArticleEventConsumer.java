@@ -1,8 +1,8 @@
 package mindev188.board.hotarticle.consumer;
 
-import kuke.board.common.event.Event;
-import kuke.board.common.event.EventPayload;
-import kuke.board.common.event.EventType;
+import mindev188.board.common.event.Event;
+import mindev188.board.common.event.EventPayload;
+import mindev188.board.common.event.EventType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import mindev188.board.hotarticle.service.HotArticleService;
